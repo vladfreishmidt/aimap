@@ -1,0 +1,51 @@
+.card {
+    background-color: #fff;
+    padding: 16px 24px;
+    cursor: pointer;
+    position: relative;
+    transition: background-color .3s ease;
+}
+
+.card::after {
+    content: '';
+    width: 90%;
+    height: 1px;
+    background-color: #E6E6E6;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: width .3s ease;
+}
+
+.card:hover {
+    background-color: #F5F5F7;
+}
+
+.card:hover::after {
+       width: 100%;
+}
+
+.title {
+    font-family: Montserrat, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.8rem;
+    line-height: 2.4rem;
+    letter-spacing: 0.002em;
+    color: #242731;
+    margin-top: 10px;
+    margin-bottom: 4px;
+}
+
+.description {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+    color: #575F6E;
+}
+
+.description:last-child {
+    margin-top: 10px;
+}

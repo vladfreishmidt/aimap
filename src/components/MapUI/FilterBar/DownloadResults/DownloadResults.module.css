@@ -1,0 +1,83 @@
+.DownloadResults {
+    width: 100%;
+    background-color: #fff;
+    padding: 32px 24px;
+
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    border-top: 1px solid #AEB1B5;
+}
+
+.pagination {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.label {
+    font-family: Montserrat, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.8rem;
+    line-height: 2.4rem;
+    letter-spacing: 0.002em;
+    color: #575F6E;
+}
+
+.label .num {
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.8rem;
+    line-height: 2.4rem;
+    color: #242731;
+}
+
+.currentPage {
+    margin-right: 16px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.8rem;
+    line-height: 2.4rem;
+    color: #1D1E24;
+}
+
+.pagesNum {
+    display: flex;
+    align-items: center;
+}
+
+.arrowBtn {
+    background: transparent;
+    border: none;
+}
+
+.downloadBtnWrapper {
+    margin-top: 24px;
+}
+
+.downloadBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    font-size: 1.8rem;
+    line-height: 2.4rem;
+    font-weight: 600;
+    color: #fff;
+    padding: 12px 24px 12px 32px;
+    background: linear-gradient(109.8deg, #F78D61 0%, #ED6044 100%);
+    border-radius: 4px;
+    font-family: Montserrat, 'sans-serif';
+    letter-spacing: 0.002em;
+    border: none;
+    cursor: pointer;
+    transition: scale .3s ease-out;
+}
+
+.downloadIcon {
+    margin-left: 12px;
+}
