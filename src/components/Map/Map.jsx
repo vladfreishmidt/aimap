@@ -1,6 +1,7 @@
 import React, {useRef, useState, useEffect} from 'react';
 import mapboxgl from 'mapbox-gl';
 import s from './Map.module.css';
+import MapboxWorker from 'worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker';
 
 const REACT_APP_MAPBOX_TOKEN = 'pk.eyJ1IjoiYWZrYXN1c3VhbCIsImEiOiJja3M4aWJiYncwdzUwMnFzMDZ3NDRrZjdoIn0.HpKfKiWP7JBRjWKDP6bJlQ';
 
