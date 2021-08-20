@@ -1,3 +1,2 @@
-# AIMAP Front-End built using React.js
+# AIMAP Front-End
 
-## [View Demo Here](https://vercel.com/vladfreishmidt/aimap-front-end "here 🌎")
