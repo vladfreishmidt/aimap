@@ -48,7 +48,7 @@
 }
 
 .filterTriggerIcon {
-    margin-right: 16px;
+    margin-right: 18px;
 }
 
 .smallBtn {
@@ -56,8 +56,12 @@
     padding-right: 0;
 }
 
-.smallBtn .filterTriggerIcon {
+.filterTriggerBtn .filterTriggerIcon {
     transform: rotate(180deg);
+}
+
+.smallBtn.filterTriggerBtn .filterTriggerIcon {
+    transform: rotate(0deg);
 }
 
 .smallBtn span {

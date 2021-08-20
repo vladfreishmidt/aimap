@@ -49,9 +49,6 @@ function App() {
          .catch(setError);
    }
 
-   // TEMP
-   console.log(objectDetailedInfo)
-
    return (
       <div className="app-wrapper">
          <BrowserRouter>

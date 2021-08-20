@@ -29,24 +29,12 @@ const Map = () => {
 
       // Add vector tiles as a source (requires debugging) -- !
       map.current.on('load', () => {
-         map.current.addSource('mapbox-terrain', {
+         map.current.addSource('hello-world', {
             type: 'vector',
-            url: 'mapbox://afkasusual.hello-world-tiles2',
+            url: 'mapbox://afkasusual.hello-world-tiles',
+
          });
 
-         // Render custom Markers (requires debugging) -- !
-         map.current.addLayer({
-            'id': 'circle',
-            'type': 'circle',
-            'source': 'mapbox-terrain',
-            "source-layer": 'mapbox-terrain',
-            'paint': {
-               'circle-color': '#4264fb',
-               'circle-radius': 8,
-               'circle-stroke-width': 2,
-               'circle-stroke-color': '#ffffff'
-            }
-         });
       });
 
       // Autofocus
@@ -65,27 +53,50 @@ const Map = () => {
 
          const popup = new mapboxgl.Popup({closeOnClick: false})
             .setLngLat(currentFeature.geometry.coordinates)
-            .setHTML('<h3>Об\'єкт info string</h3>' +
-               '<h4>' + currentFeature.properties.address + '</h4>')
+            .setHTML(`
+                <div class="marker">
+                    <div>
+                        <div class="header">
+                            <div class="text">
+                                <div class="name">${currentFeature.properties.name}</div>
+                                <div class="classifier">${currentFeature.properties.aimap_classifier}</div>
+                            </div>
+                            <div class="icon"></div>
+                        </div>
+                        <div class="address">
+                            ${currentFeature.properties.street}  
+                            ${currentFeature.properties.build_num}
+                            &middot;
+                            ${currentFeature.properties.construction_type}
+                            &middot;
+                            <!-- // TEMP -->
+                            CC1
+                            &middot;
+                            130 м<sup>2</sup>
+                            &middot;
+                            3 поверхи
+                        </div>
+                    <div>
+                </div>
+             `)
             .addTo(map.current);
       }
 
-
-      // Marker Click Handler
-      map.current.on('click', function (e) {
+      // Marker Hover Handler
+      map.current.on('mousemove', function (e) {
          /* Determine if a feature in the "locations" layer exists at that point. */
          const features = map.current.queryRenderedFeatures(e.point, {
-            layers: ['mapbox-terrain']
+            layers: ['hello-world']
          });
 
          if (features.length) {
             const clickedPoint = features[0];
-            console.log(clickedPoint);
+            // console.log(clickedPoint);
 
             // DEBUG NEXT
 
             /* Fly to the point */
-            flyToObject(clickedPoint);
+            // flyToObject(clickedPoint);
 
             /* Close all other popups and display popup for clicked store */
             createPopUp(clickedPoint);
