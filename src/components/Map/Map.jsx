@@ -1,5 +1,5 @@
 import React, {useRef, useState, useEffect} from 'react';
-import mapboxgl from 'mapbox-gl';
+import mapboxgl from '!mapbox-gl';
 import s from './Map.module.css';
 import MapboxWorker from 'worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker';
 
