@@ -1,22 +1,22 @@
 .app-wrapper {
     width: 100vw;
     height: 100vh;
-    position: relative;
+    display: flex;
+    justify-content: space-between;
     overflow: hidden;
 }
 
 .page-container {
-    position: absolute;
-    left: 100px;
-    top: 0;
-    width: calc(100vw - 100px);
-    height: 100%;
+    width: 100%;
+    height: auto;
+    position: relative;
 }
 
 
 /* Marker Pop-up start */
 
 .mapboxgl-popup {
+    top: -15px;
     min-width: 316px;
     max-width: none !important;
     box-shadow: 0 10px 18px rgba(9, 30, 66, 0.15), 0 0 1px rgba(9, 30, 66, 0.31);
@@ -76,3 +76,10 @@
 }
 
 /* Marker Pop-up end */
+
+
+/* Map canvas */
+.mapboxgl-canvas {
+    width: 100%;
+    height: auto;
+}

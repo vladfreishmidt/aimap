@@ -10,7 +10,8 @@ const MapUI = ({
                   setFilterBarActive,
                   objectDetailsActive,
                   setObjectDetailsActive,
-                  objectDetailedInfo
+                  objectDetailedInfo,
+                  setCurrentObject
                }) => {
    return (
       <>
@@ -26,6 +27,7 @@ const MapUI = ({
                objects={objects}
                setObjectDetailsActive={setObjectDetailsActive}
                objectDetailedInfo={objectDetailedInfo}
+               setCurrentObject={setCurrentObject}
             />
          }
 

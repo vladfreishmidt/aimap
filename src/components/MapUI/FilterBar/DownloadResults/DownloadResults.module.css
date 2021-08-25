@@ -3,11 +3,7 @@
     background-color: #fff;
     padding: 32px 24px;
 
-    position: absolute;
-    left: 0;
-    bottom: 0;
-
-    border-top: 1px solid #AEB1B5;
+    border-top: 1px solid #D7D9DB;
 }
 
 .pagination {
@@ -15,6 +11,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 24px;
 }
 
 .label {
@@ -53,10 +50,6 @@
 .arrowBtn {
     background: transparent;
     border: none;
-}
-
-.downloadBtnWrapper {
-    margin-top: 24px;
 }
 
 .downloadBtn {

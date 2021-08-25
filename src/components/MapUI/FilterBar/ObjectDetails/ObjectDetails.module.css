@@ -1,8 +1,7 @@
 .objectDetails {
     width: 100%;
-    height: 82%;
     background-color: #fff;
-    position: absolute;
+    position: relative;
     top: 0;
     z-index: 20;
     overflow: auto;
@@ -81,6 +80,99 @@
     margin-right: 28px;
 }
 
+.contentTabLink {
+    cursor: pointer;
+}
+
+.detailsTab {
+    padding: 32px 24px;
+    margin-bottom: 32px;
+    position: relative;
+    overflow: scroll;
+}
+
+.detailsTab::after {
+    content: "";
+    width: 91.5%;
+    height: 1px;
+    background-color: #E6E6E6;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+}
+
+
+.tabTitle {
+    font-family: Montserrat, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 2.0rem;
+    line-height: 2.6rem;
+    color: #242731;
+    margin-bottom: 16px;
+}
+
+.tabText {
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.4rem;
+    line-height: 2.2rem;
+    color: #1D1E24;
+    margin-bottom: 8px;
+}
+
+.tabTable {
+    margin-bottom: 24px;
+}
+
+.tabRow {
+
+    margin-bottom: 24px;
+}
+
+tr.tabRow {
+    display: block;
+    margin-bottom: 6px;
+}
+
+.tabRow td {
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.4rem;
+    line-height: 2.2rem;
+    color: #1D1E24;
+    min-width: 244px;
+}
+
+.tabRow:last-child {
+    margin-bottom: 0;
+}
+
+.tabCol {
+    min-width: 244px;
+    max-width: 244px;
+}
+
+.tabRow.description p {
+    margin: 0;
+}
+
+.subTabTitle {
+    /* Subhead 2/Semibold 16 */
+
+    font-family: Montserrat, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.6rem;
+    line-height: 2.0rem;
+    letter-spacing: 0.0016em;
+    color: #242731;
+    margin-bottom: 4px;
+    margin-top: 0;
+}
 
 
 

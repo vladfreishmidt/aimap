@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import s from './ObjectCard.module.css';
 
-const ObjectCard = ({name, category, cc, setObjectDetailsActive}) => {
+const ObjectCard = ({name, category, cc, setObjectDetailsActive, id, setCurrentObject}) => {
 
    const [collapsedTitle, setCollapsedTitle] = useState(true);
 
    return (
-      <div className={s.card} onClick={() => setObjectDetailsActive(true)}>
+      <div className={s.card} onClick={() => {setObjectDetailsActive(true); setCurrentObject(id);}}>
          <img className={s.objectIcon} src="../assets/icons/object-types/house.svg" alt="object type"/>
          <h4 className={s.title} onClick={() => setCollapsedTitle(!collapsedTitle)}>
             {

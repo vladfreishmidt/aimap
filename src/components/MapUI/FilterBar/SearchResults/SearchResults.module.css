@@ -1,6 +1,6 @@
 .searchResults {
     min-height: 170px;
-    max-height: 55%;
-    overflow: auto;
-    padding-bottom: 119px;
+    padding-bottom: 32px;
+    box-shadow: inset -1px -1px 1px #D7D9DB;
+    overflow: scroll;
 }

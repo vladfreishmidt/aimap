@@ -1,12 +1,12 @@
 import React from 'react';
 import s from './DownloadResults.module.css';
 
-const DownloadResults = () => {
+const DownloadResults = ({objectDetailsActive}) => {
    return (
       <div className={s.DownloadResults}>
 
          {/* Pagination */}
-         <div className={s.pagination}>
+         { !objectDetailsActive && <div className={s.pagination}>
                <div className={s.label}>
                   Результат: <span className={s.num}>317 об’єктів</span>
                </div>
@@ -21,7 +21,7 @@ const DownloadResults = () => {
                      </button>
                   </div>
                </div>
-         </div>
+         </div> }
 
          {/* Download button */}
          <div className={s.downloadBtnWrapper}>

@@ -11,7 +11,8 @@ const FilterBar = ({
                       objects,
                       objectDetailsActive,
                       setObjectDetailsActive,
-                      objectDetailedInfo
+                      objectDetailedInfo,
+                      setCurrentObject
                    }) => {
    return (
       <div className={s.filterBar}>
@@ -31,6 +32,7 @@ const FilterBar = ({
             !objectDetailsActive
             &&
             <SearchResults
+               setCurrentObject={setCurrentObject}
                objects={objects}
                setObjectDetailsActive={setObjectDetailsActive}
             />
@@ -47,7 +49,7 @@ const FilterBar = ({
          }
 
          {/* Download Component */}
-         <DownloadResults/>
+         <DownloadResults objectDetailsActive={objectDetailsActive}/>
       </div>
    )
 }

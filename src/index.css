@@ -18,9 +18,3 @@ body {
     --text-primary-dark: #242731;
     --text-gradient-primary: -webkit-linear-gradient(#F78D61, #ED6044);
 }
-
-.page-container {
-    position: absolute;
-    left: 100px;
-    top: 0;
-}

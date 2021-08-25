@@ -6,4 +6,9 @@
     position: absolute;
     top: 0;
     left: 0;
+
+    box-shadow: inset -1px -1px 1px #D7D9DB;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }

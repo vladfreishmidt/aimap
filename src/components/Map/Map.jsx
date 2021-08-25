@@ -5,7 +5,7 @@ import MapboxWorker from 'worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker';
 
 const REACT_APP_MAPBOX_TOKEN = 'pk.eyJ1IjoiYWZrYXN1c3VhbCIsImEiOiJja3M4aWJiYncwdzUwMnFzMDZ3NDRrZjdoIn0.HpKfKiWP7JBRjWKDP6bJlQ';
 
-const Map = () => {
+const Map = ({filterBarActive, setCurrentObject, setObjectDetailsActive, setFilterBarActive}) => {
    mapboxgl.accessToken = REACT_APP_MAPBOX_TOKEN;
 
    // Refs
@@ -35,15 +35,34 @@ const Map = () => {
 
          });
 
+
+         map.current.on('mouseout', () => {
+            console.log('A mouseout event occurred.');
+            const popUps = document.getElementsByClassName('mapboxgl-popup');
+            /** Check if there is already a popup on the map and if so, remove it */
+
+
+            // Mouse leave and hide pop-up
+
+            if (popUps) popUps[0].style.display = "none";
+
+
+         });
+
       });
 
       // Autofocus
-      function flyToObject(currentFeature) {
-         map.current.flyTo({
-            center: currentFeature.geometry.coordinates,
-            zoom: 15
-         });
+      // function flyToObject(currentFeature) {
+      //    map.current.flyTo({
+      //       center: currentFeature.geometry.coordinates,
+      //       zoom: 15
+      //    });
+      // }
+
+      const handlePopupClick = () => {
+         console.log('hey')
       }
+
 
       // Marker Pop-up
       function createPopUp(currentFeature) {
@@ -54,7 +73,7 @@ const Map = () => {
          const popup = new mapboxgl.Popup({closeOnClick: false})
             .setLngLat(currentFeature.geometry.coordinates)
             .setHTML(`
-                <div class="marker">
+                <div class="marker" >
                     <div>
                         <div class="header">
                             <div class="text">
@@ -68,7 +87,7 @@ const Map = () => {
                             ${currentFeature.properties.build_num}
                             &middot;
                             ${currentFeature.properties.construction_type}
-                            &middot;
+                            &middot 
                             <!-- // TEMP -->
                             CC1
                             &middot;
@@ -91,35 +110,55 @@ const Map = () => {
 
          if (features.length) {
             const clickedPoint = features[0];
+
+
+            // /* Fly to the point */
+            // flyToObject(clickedPoint);
+
+            createPopUp(clickedPoint);
+
+         }
+      });
+
+      map.current.on('click', '.marker', function () {
+         console.log("clicked")
+      });
+
+      // Marker Click Handler
+      map.current.on('click', function (e) {
+         /* Determine if a feature in the "locations" layer exists at that point. */
+         const features = map.current.queryRenderedFeatures(e.point, {
+            layers: ['hello-world']
+         });
+
+         if (features.length) {
+            const clickedPoint = features[0];
             // console.log(clickedPoint);
 
             // DEBUG NEXT
 
-            /* Fly to the point */
+            // /* Fly to the point */
             // flyToObject(clickedPoint);
 
-            /* Close all other popups and display popup for clicked store */
-            createPopUp(clickedPoint);
+            console.log(clickedPoint)
+            setObjectDetailsActive(true);
+            setFilterBarActive(true);
 
-            /* Highlight listing in sidebar (and remove highlight for all other listings) */
-
-            // const activeItem = document.getElementsByClassName('active');
-
-            // if (activeItem[0]) {
-            //    activeItem[0].classList.remove('active');
-            // }
-
-            // const listing = document.getElementById('listing-' + clickedPoint.properties.id);
-            // listing.classList.add('active');
          }
+
+         map.current.on('click', '.marker', function(e) {
+            console.log(e.target);
+         });
       });
+
+
    });
 
    // Temp
    console.log('Map rerender ❤️‍🔥');
 
    return (
-      <div ref={mapContainer} className={s.mapContainer}/>
+      <div ref={mapContainer} className={`${s.mapContainer} ${filterBarActive ? s.shrink : s.grow}`}/>
    )
 };
 
