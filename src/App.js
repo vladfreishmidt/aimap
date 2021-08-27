@@ -92,7 +92,7 @@ function App() {
             />
 
             {/* MAP UI */}
-            <Route path="/map" render={() =>
+            <Route path="/map-no" render={() =>
                <MapUI
                   filterBarActive={filterBarActive}
                   setFilterBarActive={setFilterBarActive}
