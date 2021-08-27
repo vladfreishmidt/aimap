@@ -27,7 +27,7 @@ const Filters = ({searchText, setSearchText}) => {
          {/*Filter Group*/}
          <div className={s.filterGroup}>
             <ObjectTypeFilter />
-            <button className={s.btn}>Рік</button>
+            <button className={s.btn}>Період</button>
             <CCFilter />
 
          </div>

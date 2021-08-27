@@ -21,7 +21,9 @@
 .info {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
+
+    margin-bottom: 44px;
 
     font-family: Montserrat, sans-serif;
     font-style: normal;
@@ -29,12 +31,14 @@
     font-size: 1.4rem;
     line-height: 1.8rem;
     color: #242731;
+
 }
 
 .info img {
+    margin-top: 2px;
     margin-right: 19px;
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
 }
 
 .info span {
@@ -43,10 +47,14 @@
 
 .btn.active {
     background: #F5F5F7;
-    /* Primary/Dark blue */
-
     border: 2px solid #242731;
 }
+
+.btn:hover {
+    background: #F5F5F7;
+    border: 2px solid #242731;
+}
+
 
 .filterBody {
     border-radius: 8px;
@@ -118,7 +126,6 @@
 }
 
 .formGroup {
-    margin-top: 40px;
     display: flex;
     flex-direction: column;
 }
@@ -131,6 +138,26 @@
     line-height: 2.4rem;
     color: #242731;
     margin-right: 10px;
+
+    display: flex;
+    align-items: center;
+}
+
+.formGroup input {
+    width: 24px;
+    height: 24px;
+    position: relative;
+    border: none ;
+}
+
+.formGroup input::before {
+    content: '';
+    width: 24px;
+    height: 25px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 4px;
 }
 
 .formGroup label:not(:last-child) {
@@ -139,4 +166,5 @@
 
 .formGroup span {
     margin-left: 10px;
+    line-height: 2.4rem;
 }

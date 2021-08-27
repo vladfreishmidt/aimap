@@ -15,7 +15,7 @@ const ObjectTypeCard = ({option, setSelectedFilter, selectedFilters}) => {
    return (
          <div className={`${s.objectCard} ${selectedFilters.includes(option.name) ? s.active : ""}`} onClick={() => handleFilterToggle()}>
          <div className={s.icon}>
-
+            <img src={option.icon} alt="object type"/>
          </div>
          <div className={s.name}>
             {option.name}

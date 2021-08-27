@@ -9,7 +9,7 @@ import {Route} from "react-router-dom";
 
 function App() {
 
-   const URL = "https://api.aimapa.com/objects/paged?offset=250&limit=20&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoX3V1aWQiOiIwMDAwMWM0ZS01NmU5LTQ0ZjYtOTkzNi02NTRjNDUxOTgyYjQiLCJhdXRob3JpemVkIjp0cnVlLCJ1c2VyX2lkIjoxfQ.OFZtQcnD71pMyrDCcT6GxVwgs1kpfg1QBqVQwwI1fvo";
+   const URL = "https://app.aimapa.com/objects/";
 
 
    // App initial state
@@ -34,6 +34,7 @@ function App() {
    });
 
 
+
    // Filters state
 
    const [objectTypeFilterActive, setObjectTypeFilterActive] = useState(false);
@@ -46,7 +47,16 @@ function App() {
 
    // Fetch Objects List
    useEffect(() => {
-      fetch(URL)
+      fetch(URL, {
+         method: "POST",
+         headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+         },
+         body:{
+
+         }
+      })
          .then(data => data.json())
          .then((data) => setObject(data.objects))
          .catch(setError);
