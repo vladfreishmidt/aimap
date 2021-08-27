@@ -1,0 +1,41 @@
+.objectCard {
+    width: 208px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+
+    cursor: pointer;
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+.objectCard:not(:last-child) {
+
+}
+
+.objectCard:hover {
+    background-color: #F5F5F7;
+}
+
+.icon {
+    width: 56px;
+    height: 56px;
+    border: 1px solid #AEB1B5;
+    border-radius: 4px;
+    margin-right: 8px;
+    flex: 0 0 56px;
+}
+
+.name {
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.4rem;
+    line-height: 2.2rem;
+    color: #242731;
+}
+
+.active .icon {
+    border: 2px solid #F78D61;
+}
+

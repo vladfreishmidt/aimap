@@ -76,6 +76,9 @@
 .filterGroup {
     margin-top: 32px;
     display: flex;
+    align-items: center;
+    min-height: 54px;
+    position: relative;
 }
 
 .filterGroup .btn:not(:last-child) {

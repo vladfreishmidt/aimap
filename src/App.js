@@ -9,7 +9,7 @@ import {Route} from "react-router-dom";
 
 function App() {
 
-   const URL = "https://api.aimapa.com/objects/paged?offset=250&limit=15&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoX3V1aWQiOiIwMDAwMWM0ZS01NmU5LTQ0ZjYtOTkzNi02NTRjNDUxOTgyYjQiLCJhdXRob3JpemVkIjp0cnVlLCJ1c2VyX2lkIjoxfQ.OFZtQcnD71pMyrDCcT6GxVwgs1kpfg1QBqVQwwI1fvo";
+   const URL = "https://api.aimapa.com/objects/paged?offset=250&limit=20&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoX3V1aWQiOiIwMDAwMWM0ZS01NmU5LTQ0ZjYtOTkzNi02NTRjNDUxOTgyYjQiLCJhdXRob3JpemVkIjp0cnVlLCJ1c2VyX2lkIjoxfQ.OFZtQcnD71pMyrDCcT6GxVwgs1kpfg1QBqVQwwI1fvo";
 
 
    // App initial state
@@ -23,7 +23,6 @@ function App() {
       zoom: 14,
    });
 
-
    const [objects, setObject] = useState([])
    const [error, setError] = useState(null);
 
@@ -35,9 +34,15 @@ function App() {
    });
 
 
+   // Filters state
+
+   const [objectTypeFilterActive, setObjectTypeFilterActive] = useState(false);
+
+
    // Current Object ID state
 
    const [currentObjectId, setCurrentObject] = useState(1268452);
+
 
    // Fetch Objects List
    useEffect(() => {
@@ -68,7 +73,6 @@ function App() {
          )
          .catch(err => console.error(err));
 
-      console.log(setObjectDetailsInfo);
    }, [objectDetailsActive]);
 
 
@@ -79,7 +83,8 @@ function App() {
          <Navbar/>
 
          <div className="page-container">
-            {/* MAP */}
+
+            {/* MAP Component */}
             <Route
                path="/map"
                render={() => <Map
@@ -92,7 +97,8 @@ function App() {
             />
 
             {/* MAP UI */}
-            <Route path="/map-no" render={() =>
+            <Route path="/map" render={() =>
+
                <MapUI
                   filterBarActive={filterBarActive}
                   setFilterBarActive={setFilterBarActive}
@@ -102,7 +108,8 @@ function App() {
                   setObjectDetailsActive={setObjectDetailsActive}
                   objectDetailedInfo={objectDetailedInfo}
                   setCurrentObject={setCurrentObject}
-               />}
+               />
+            }
             />
 
             {/* DASHBOARD */}

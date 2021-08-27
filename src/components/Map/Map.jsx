@@ -3,9 +3,10 @@ import mapboxgl from '!mapbox-gl';
 import s from './Map.module.css';
 import MapboxWorker from 'worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker';
 
-const REACT_APP_MAPBOX_TOKEN = 'pk.eyJ1IjoiYWZrYXN1c3VhbCIsImEiOiJja3M4aWJiYncwdzUwMnFzMDZ3NDRrZjdoIn0.HpKfKiWP7JBRjWKDP6bJlQ';
+   const REACT_APP_MAPBOX_TOKEN = 'pk.eyJ1IjoiYWltYXAiLCJhIjoiY2tzaXBsY3VmMGNkdjJvbmNpajd4bzNsdSJ9.ob9hYvyUocVZ343tQy2wSg';
 
-const Map = ({filterBarActive, setCurrentObject, setObjectDetailsActive, setFilterBarActive}) => {
+   const Map = ({filterBarActive, setCurrentObject, setObjectDetailsActive, setFilterBarActive}) => {
+
    mapboxgl.accessToken = REACT_APP_MAPBOX_TOKEN;
 
    // Refs
@@ -13,40 +14,44 @@ const Map = ({filterBarActive, setCurrentObject, setObjectDetailsActive, setFilt
    const map = useRef(null);
 
    // Map initial state
-   const [lng, setLng] = useState(30.5238);
+   const [lng, setLng] = useState(27.5238);
    const [lat, setLat] = useState(50.45466);
-   const [zoom, setZoom] = useState(5.5);
+   const [zoom, setZoom] = useState(5);
 
    // Map initialization
    useEffect(() => {
       if (map.current) return; // initialize map only once
       map.current = new mapboxgl.Map({
          container: mapContainer.current,
-         style: "mapbox://styles/afkasusual/cksdsl51u75d317quawci46i1",
+         style: "mapbox://styles/aimap/ckssxwfr41f0518o2lm2pgmfc",
          center: [lng, lat],
          zoom: zoom
       });
 
       // Add vector tiles as a source (requires debugging) -- !
       map.current.on('load', () => {
-         map.current.addSource('hello-world', {
+         map.current.addSource('test-tileset2', {
             type: 'vector',
-            url: 'mapbox://afkasusual.hello-world-tiles',
-
+            url: 'mapbox://aimap.test-tileset2',
          });
 
+         // map.current.setLayoutProperty("test-tileset2", 'visibility', 'none');
 
-         map.current.on('mouseout', () => {
-            console.log('A mouseout event occurred.');
-            const popUps = document.getElementsByClassName('mapboxgl-popup');
-            /** Check if there is already a popup on the map and if so, remove it */
-
-
-            // Mouse leave and hide pop-up
-
-            if (popUps) popUps[0].style.display = "none";
-
-
+         map.current.addLayer({
+            'id': 'point',
+            'source': 'test-tileset2',
+            'type': 'circle',
+            'source-layer': 'test_tileset',
+            'paint': {
+               'circle-radius': 10,
+               'circle-color': '#555',
+               'circle-stroke-width': 2,
+               'circle-stroke-color': "#fff"
+            },
+            filter: ['all',
+               ['in', 'construction_type', "нове будівництво", "реконструкція"]
+               // ['in', 'aimap_classifier', "Будинки житлові багатоквартирні"]
+            ]
          });
 
       });
@@ -58,11 +63,7 @@ const Map = ({filterBarActive, setCurrentObject, setObjectDetailsActive, setFilt
       //       zoom: 15
       //    });
       // }
-
-      const handlePopupClick = () => {
-         console.log('hey')
-      }
-
+      let popup;
 
       // Marker Pop-up
       function createPopUp(currentFeature) {
@@ -70,7 +71,7 @@ const Map = ({filterBarActive, setCurrentObject, setObjectDetailsActive, setFilt
          /** Check if there is already a popup on the map and if so, remove it */
          if (popUps[0]) popUps[0].remove();
 
-         const popup = new mapboxgl.Popup({closeOnClick: false})
+         popup = new mapboxgl.Popup({closeOnClick: true})
             .setLngLat(currentFeature.geometry.coordinates)
             .setHTML(`
                 <div class="marker" >
@@ -99,59 +100,48 @@ const Map = ({filterBarActive, setCurrentObject, setObjectDetailsActive, setFilt
                 </div>
              `)
             .addTo(map.current);
+
       }
 
+      map.current.on('mouseleave', 'point', function() {
+         map.current.getCanvas().style.cursor = '';
+         popup.remove();
+      });
+
       // Marker Hover Handler
-      map.current.on('mousemove', function (e) {
+      map.current.on('mouseenter', 'point', function (e) {
+         map.current.getCanvas().style.cursor = 'pointer';
          /* Determine if a feature in the "locations" layer exists at that point. */
          const features = map.current.queryRenderedFeatures(e.point, {
-            layers: ['hello-world']
+            layers: ['point']
          });
+
 
          if (features.length) {
             const clickedPoint = features[0];
-
-
-            // /* Fly to the point */
-            // flyToObject(clickedPoint);
-
             createPopUp(clickedPoint);
-
          }
       });
 
-      map.current.on('click', '.marker', function () {
-         console.log("clicked")
-      });
 
       // Marker Click Handler
       map.current.on('click', function (e) {
          /* Determine if a feature in the "locations" layer exists at that point. */
          const features = map.current.queryRenderedFeatures(e.point, {
-            layers: ['hello-world']
+            layers: ['point']
          });
 
          if (features.length) {
             const clickedPoint = features[0];
-            // console.log(clickedPoint);
 
-            // DEBUG NEXT
+            console.log(clickedPoint) // TEMP
 
-            // /* Fly to the point */
-            // flyToObject(clickedPoint);
-
-            console.log(clickedPoint)
             setObjectDetailsActive(true);
             setFilterBarActive(true);
 
          }
 
-         map.current.on('click', '.marker', function(e) {
-            console.log(e.target);
-         });
       });
-
-
    });
 
    // Temp

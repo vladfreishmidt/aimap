@@ -1,5 +1,7 @@
 import React, {createRef} from "react";
 import s from './Filters.module.css';
+import ObjectTypeFilter from './ObjectTypeFilter/ObjectTypeFilter';
+import CCFilter from './CCFilter/CCFilter';
 
 const Filters = ({searchText, setSearchText}) => {
 
@@ -24,9 +26,10 @@ const Filters = ({searchText, setSearchText}) => {
 
          {/*Filter Group*/}
          <div className={s.filterGroup}>
-            <button className={s.btn}>Тип об’єкту</button>
+            <ObjectTypeFilter />
             <button className={s.btn}>Рік</button>
-            <button className={s.btn}>Наслідки</button>
+            <CCFilter />
+
          </div>
 
       </div>
