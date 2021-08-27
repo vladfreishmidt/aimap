@@ -8,44 +8,43 @@ const ObjectTypeFilter = () => {
       {
          id: 1,
          name: "Готелі, пансіонати, гуртожитки",
-         icon: ""
+         icon: "http://localhost:3000/assets/icons/object-types/Hotels.svg"
       },
       {
          id: 2,
          name: "Спортзали, спорт. майданчики",
-         icon: ""
+         icon: "http://localhost:3000/assets/icons/object-types/Gyms.svg"
       },
       {
          id: 3,
          name: "Будинки житлові котеджного типу",
-         icon: ""
+         icon: "http://localhost:3000/assets/icons/object-types/House.svg"
       },
       {
          id: 4,
          name: "Торгові центри,  магазини",
-         icon: ""
+         icon: "http://localhost:3000/assets/icons/object-types/Markets.svg"
       },
       {
          id: 5,
          name: "Лікарні",
-         icon: ""
+         icon: "http://localhost:3000/assets/icons/object-types/Medicine.svg"
       },
       {
          id: 6,
          name: "Транспортна інфраструктура",
-         icon: ""
+         icon: "http://localhost:3000/assets/icons/object-types/Transport.svg"
       },
       {
          id: 7,
          name: "Гаражі, стоянки, СТО",
-         icon: ""
+         icon: "http://localhost:3000/assets/icons/object-types/GAS.svg"
       },
       {
          id: 8,
          name: "Ресторани, кафе, їдальні",
-         icon: ""
-      },
-
+         icon: "http://localhost:3000/assets/icons/object-types/Food.svg"
+      }
    ]);
 
    const [selectedFilters, setSelectedFilter] = useState([]);

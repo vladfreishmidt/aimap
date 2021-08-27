@@ -24,6 +24,10 @@
     border-radius: 4px;
     margin-right: 8px;
     flex: 0 0 56px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .name {
