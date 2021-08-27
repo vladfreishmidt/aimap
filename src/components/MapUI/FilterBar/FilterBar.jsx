@@ -5,6 +5,7 @@ import SearchResults from "./SearchResults/SearchResults";
 import DownloadResults from "./DownloadResults/DownloadResults";
 import ObjectDetails from "./ObjectDetails/ObjectDetails";
 
+
 const FilterBar = ({
                       setSearchText,
                       searchText,
@@ -34,11 +35,13 @@ const FilterBar = ({
          {
             !objectDetailsActive
             &&
+
             <SearchResults
                setCurrentObject={setCurrentObject}
                objects={objects}
                setObjectDetailsActive={setObjectDetailsActive}
             />
+
          }
 
          {/* Object Details Component */}

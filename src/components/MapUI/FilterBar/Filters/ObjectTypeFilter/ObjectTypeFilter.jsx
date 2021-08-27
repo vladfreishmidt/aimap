@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import s from "./ObjectTypeFilter.module.css";
 import ObjectTypeCard from './ObjectTypeCard/ObjectTypeCard';
 
 const ObjectTypeFilter = () => {
    const [objectFilterActive, setObjectFilterActive] = useState(false);
+   
    const [filterOptionsData, setFilterOptionsData] = useState([
       {
          id: 1,
@@ -47,7 +48,12 @@ const ObjectTypeFilter = () => {
       }
    ]);
 
-   const [selectedFilters, setSelectedFilter] = useState([]);
+   useEffect(() => {
+      setFilterOptionsData((curr) => curr);
+   }, [])
+
+
+   const [selectedObjTypeFilters, setSelectedObjTypeFilters] = useState([]);
 
    return (
       <div className={s.filterWrapper}>
@@ -64,8 +70,8 @@ const ObjectTypeFilter = () => {
                   {filterOptionsData.map(option => <ObjectTypeCard
                      key={option.id}
                      option={option}
-                     setSelectedFilter={setSelectedFilter}
-                     selectedFilters={selectedFilters}
+                     setSelectedObjTypeFilters={setSelectedObjTypeFilters}
+                     selectedObjTypeFilters={selectedObjTypeFilters}
 
                      />)
                   }

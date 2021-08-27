@@ -3,6 +3,8 @@ import mapboxgl from '!mapbox-gl';
 import s from './Map.module.css';
 import MapboxWorker from 'worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker';
 
+MapboxWorker(); //TEMP
+
    const REACT_APP_MAPBOX_TOKEN = 'pk.eyJ1IjoiYWltYXAiLCJhIjoiY2tzaXBsY3VmMGNkdjJvbmNpajd4bzNsdSJ9.ob9hYvyUocVZ343tQy2wSg';
 
    const Map = ({filterBarActive, setCurrentObject, setObjectDetailsActive, setFilterBarActive}) => {
@@ -70,6 +72,9 @@ import MapboxWorker from 'worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker';
          const popUps = document.getElementsByClassName('mapboxgl-popup');
          /** Check if there is already a popup on the map and if so, remove it */
          if (popUps[0]) popUps[0].remove();
+         setLng(curr => curr);
+         setLat(curr => curr);
+         setZoom(curr => curr);
 
          popup = new mapboxgl.Popup({closeOnClick: true})
             .setLngLat(currentFeature.geometry.coordinates)
@@ -134,11 +139,11 @@ import MapboxWorker from 'worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker';
          if (features.length) {
             const clickedPoint = features[0];
 
-            console.log(clickedPoint) // TEMP
+            console.log(clickedPoint); // TEMP
 
             setObjectDetailsActive(true);
             setFilterBarActive(true);
-
+            setCurrentObject(clickedPoint.properties.hash_id);
          }
 
       });

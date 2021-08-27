@@ -1,19 +1,18 @@
 import React from 'react';
 import s from './ObjectTypeCard.module.css';
 
-const ObjectTypeCard = ({option, setSelectedFilter, selectedFilters}) => {
+const ObjectTypeCard = ({option, setSelectedObjTypeFilters, selectedObjTypeFilters}) => {
 
    const handleFilterToggle = () => {
-      if (selectedFilters.includes(option.name)) {
-         setSelectedFilter(curr => curr.filter(item => item !== option.name));
+      if (selectedObjTypeFilters.includes(option.name)) {
+         setSelectedObjTypeFilters(curr => curr.filter(item => item !== option.name));
       } else {
-         setSelectedFilter(curr => [...curr, option.name]);
+         setSelectedObjTypeFilters(curr => [...curr, option.name]);
       }
    }
 
-
    return (
-         <div className={`${s.objectCard} ${selectedFilters.includes(option.name) ? s.active : ""}`} onClick={() => handleFilterToggle()}>
+         <div className={`${s.objectCard} ${selectedObjTypeFilters.includes(option.name) ? s.active : ""}`} onClick={() => handleFilterToggle()}>
          <div className={s.icon}>
             <img src={option.icon} alt="object type"/>
          </div>

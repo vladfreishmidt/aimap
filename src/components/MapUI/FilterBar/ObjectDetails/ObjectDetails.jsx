@@ -16,8 +16,14 @@ const ObjectDetails = ({setObjectDetailsActive, objectDetailedInfo}) => {
                </button>
             </div>
             <div className={s.bottom}>
-               <h4 className={s.title}>{objectDetailedInfo.object.name}</h4>
-               <p className={s.description}>{objectDetailedInfo.object.address}</p>
+               <h4 className={s.title}>
+                  HARD CODED TEXT
+                  {/*{objectDetailedInfo.object.name}*/}
+               </h4>
+               <p className={s.description}>
+                  HARD CODED TEXT
+                  {/*{objectDetailedInfo.object.address}*/}
+               </p>
             </div>
          </div>
          <div className={s.content}>
@@ -41,7 +47,7 @@ const ObjectDetails = ({setObjectDetailsActive, objectDetailedInfo}) => {
                      <tbody>
                      <tr className={s.tabRow}>
                         <td>Адреса:</td>
-                        <td>{objectDetailedInfo.object.address}</td>
+                        {/*<td>{objectDetailedInfo.object.address}</td>*/}
                      </tr>
                      <tr className={s.tabRow}>
                         <td>Тип будівництва:</td>
@@ -50,7 +56,7 @@ const ObjectDetails = ({setObjectDetailsActive, objectDetailedInfo}) => {
                      </tr>
                      <tr className={s.tabRow}>
                         <td>Клас наслідків:</td>
-                        <td>CC{objectDetailedInfo.object.consequence_class}</td>
+                        {/*<td>CC{objectDetailedInfo.object.consequence_class}</td>*/}
                      </tr>
                      <tr className={s.tabRow}>
                         <td>Дозвільний документ:</td>
@@ -102,7 +108,8 @@ const ObjectDetails = ({setObjectDetailsActive, objectDetailedInfo}) => {
                   </h4>
                   <div className={`${s.tabRow} ${s.description}`}>
                      <p className={s.tabText}>
-                        {objectDetailedInfo.object.description}
+                        {/*{objectDetailedInfo.object.description}*/}
+                        HARD CODED TEXT
                      </p>
 
                   </div>

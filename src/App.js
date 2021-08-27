@@ -6,11 +6,27 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import MapUI from "./components/MapUI/MapUI";
 import {Route} from "react-router-dom";
 
+// React Queries Test
+// import { QueryClientProvider, useQuery } from 'react-query';
+// import { ReactQueryDevtools } from 'react-query/devtools';
+
+
+
+
+
+
 
 function App() {
+   // const getEmployee = async () => {
+   //    const { data } = await axios.get('http://dummy.restapiexample.com');
+   //    return data.data;
+   // };
+   //
+   // const { data } = useQuery('create', getEmployee);
+
+   // console.log(data);
 
    const URL = "https://app.aimapa.com/objects/";
-
 
    // App initial state
    const [searchText, setSearchText] = useState("");
@@ -24,9 +40,10 @@ function App() {
    });
 
    const [objects, setObject] = useState([])
-   const [error, setError] = useState(null);
 
-   const [filterBarActive, setFilterBarActive] = useState(true)
+
+   const [filterBarActive, setFilterBarActive] = useState(true);
+
    const [objectDetailsActive, setObjectDetailsActive] = useState(false);
 
    const [objectDetailedInfo, setObjectDetailsInfo] = useState({
@@ -34,57 +51,75 @@ function App() {
    });
 
 
-
-   // Filters state
-
-   const [objectTypeFilterActive, setObjectTypeFilterActive] = useState(false);
-
-
    // Current Object ID state
 
-   const [currentObjectId, setCurrentObject] = useState(1268452);
-
+   const [currentObjectId, setCurrentObject] = useState('46468c14392f01af54344f2dce7fa03d');
+   const countObj = 100;
 
    // Fetch Objects List
+
+
    useEffect(() => {
+      const reqObjBody = {
+         "limit": countObj,
+         "offset":0,
+         "aimap_classifier":["Будівлі АПК","Гаражі, стоянки, СТО"],
+         "stage_documentation":["повідомлення про початок виконання будівельних робіт"],
+         "from_date": "2021-07-01",
+         "to_date": "2021-08-31"
+      };
+
       fetch(URL, {
          method: "POST",
          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            "Access-Control-Allow-Origin": "*",
+            'Content-Type': 'application/json',
+            'Accept': '*/*',
          },
-         body:{
 
-         }
+         body: JSON.stringify(reqObjBody)
       })
          .then(data => data.json())
          .then((data) => setObject(data.objects))
-         .catch(setError);
+         .catch(err => console.log(err));
    }, []);
 
 
-   // Get Object By ID
-   const getObjectDetailedInfo = () => {
-      fetch(urlObjectId)
-         .then(data => data.json())
-         .then((data) => setObjectDetailsInfo(data.object))
-         .catch(setError);
-   }
+   // fetch Get Object By ID
+   // const getObjectDetailedInfo = () => {
+   //    fetch(urlObjectId, {
+   //       method: 'POST'
+   //    })
+   //       .then(data => data.json())
+   //       .then((data) => setObjectDetailsInfo(data.object))
+   //       .catch(err => console.log(err));
+   // }
 
    // Temp 'Object_By_ID' query string
-   const urlObjectId = `https://api.aimapa.com/objects/${currentObjectId}?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoX3V1aWQiOiIwMDAwMWM0ZS01NmU5LTQ0ZjYtOTkzNi02NTRjNDUxOTgyYjQiLCJhdXRob3JpemVkIjp0cnVlLCJ1c2VyX2lkIjoxfQ.OFZtQcnD71pMyrDCcT6GxVwgs1kpfg1QBqVQwwI1fvo`;
+   // const urlObjectId = ` https://app.aimapa.com/objects/${currentObjectId}`;
 
    // Fetch Object Details
-   useEffect(() => {
-      fetch(urlObjectId)
-         .then(res => res.json())
-         .then(
-            res => setObjectDetailsInfo(res)
-         )
-         .catch(err => console.error(err));
+   // useEffect(() => {
+   //    if (urlObjectId === null) {
+   //       return;
+   //    } else {
+   //       fetch(urlObjectId, {
+   //          method: 'POST'
+   //
+   //       // ADD BODY WITH hash_id here  ! ! !
+   //
+   //       })
+   //          .then(res => res.json())
+   //          .then(
+   //             res => setObjectDetailsInfo(res)
+   //          )
+   //          .catch(err => console.log(err));
+   //    }
+   //
+   //
+   // }, [objectDetailsActive]);
 
-   }, [objectDetailsActive]);
-
+   console.log(`clicked hash_id: ${currentObjectId}`);
 
    return (
       <div className="app-wrapper">
@@ -103,6 +138,7 @@ function App() {
                   filterBarActive={filterBarActive}
                   setObjectDetailsActive={setObjectDetailsActive}
                   setFilterBarActive={setFilterBarActive}
+                  setCurrentObject={setCurrentObject}
                />}
             />
 
@@ -118,6 +154,7 @@ function App() {
                   setObjectDetailsActive={setObjectDetailsActive}
                   objectDetailedInfo={objectDetailedInfo}
                   setCurrentObject={setCurrentObject}
+                  setObjectDetailsInfo={setObjectDetailsInfo}
                />
             }
             />
