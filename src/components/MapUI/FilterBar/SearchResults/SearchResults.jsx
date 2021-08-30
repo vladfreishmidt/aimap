@@ -3,7 +3,7 @@ import s from './SearchResults.module.css';
 import ObjectCard from './ObjectCard/ObjectCard';
 
 
-const SearchResults = ({objects, setObjectDetailsActive, setCurrentObject}) => {
+const SearchResults = ({objects, setObjectDetailsActive, setCurrentObject, setCurrentMarkerLatLon, setRemovedMarkers}) => {
 
    return (
 
@@ -12,13 +12,17 @@ const SearchResults = ({objects, setObjectDetailsActive, setCurrentObject}) => {
             {objects.map(object =>
                (
                   <ObjectCard
-                     id={object.aimap_id}
-                     key={object.aimap_id}
+                     id={object.hash_id}
+                     key={object.hash_id}
                      name={object.name}
                      category={object.aimap_classifier}
                      cc={object.consequence_class}
                      setObjectDetailsActive={setObjectDetailsActive}
                      setCurrentObject={setCurrentObject}
+                     lon={object.lon}
+                     lat={object.lat}
+                     setCurrentMarkerLatLon={setCurrentMarkerLatLon}
+                     setRemovedMarkers={setRemovedMarkers}
                   />
                ))}
          </div>

@@ -13,7 +13,9 @@ const FilterBar = ({
                       objectDetailsActive,
                       setObjectDetailsActive,
                       objectDetailedInfo,
-                      setCurrentObject
+                      setCurrentObject,
+                      setCurrentMarkerLatLon,
+                      setRemovedMarkers
                    }) => {
 
 
@@ -40,6 +42,8 @@ const FilterBar = ({
                setCurrentObject={setCurrentObject}
                objects={objects}
                setObjectDetailsActive={setObjectDetailsActive}
+               setCurrentMarkerLatLon={setCurrentMarkerLatLon}
+               setRemovedMarkers={setRemovedMarkers}
             />
 
          }

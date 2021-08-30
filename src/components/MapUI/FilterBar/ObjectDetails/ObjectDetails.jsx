@@ -18,7 +18,7 @@ const ObjectDetails = ({setObjectDetailsActive, objectDetailedInfo}) => {
             <div className={s.bottom}>
                <h4 className={s.title}>
                   HARD CODED TEXT
-                  {/*{objectDetailedInfo.object.name}*/}
+                 {objectDetailedInfo.object.name}
                </h4>
                <p className={s.description}>
                   HARD CODED TEXT

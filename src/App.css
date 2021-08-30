@@ -77,9 +77,15 @@
 
 /* Marker Pop-up end */
 
-
 /* Map canvas */
 .mapboxgl-canvas {
     width: 100%;
     height: auto;
 }
+
+.markerActive {
+    background-color: red;
+    width: 20px;
+    height: 20px;
+}
+

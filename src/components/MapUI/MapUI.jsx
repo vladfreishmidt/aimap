@@ -11,7 +11,9 @@ const MapUI = ({
                   objectDetailsActive,
                   setObjectDetailsActive,
                   objectDetailedInfo,
-                  setCurrentObject
+                  setCurrentObject,
+                  setCurrentMarkerLatLon,
+                  setRemovedMarkers
                }) => {
    return (
       <>
@@ -28,6 +30,8 @@ const MapUI = ({
                setObjectDetailsActive={setObjectDetailsActive}
                objectDetailedInfo={objectDetailedInfo}
                setCurrentObject={setCurrentObject}
+               setCurrentMarkerLatLon={setCurrentMarkerLatLon}
+               setRemovedMarkers={setRemovedMarkers}
             />
          }
 

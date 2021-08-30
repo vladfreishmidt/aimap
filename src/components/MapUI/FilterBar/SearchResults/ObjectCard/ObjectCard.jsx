@@ -1,12 +1,24 @@
 import React, {useState} from 'react';
 import s from './ObjectCard.module.css';
 
-const ObjectCard = ({name, category, cc, setObjectDetailsActive, id, setCurrentObject}) => {
+const ObjectCard = ({lon, lat, name, category, cc, setObjectDetailsActive, id, setCurrentObject, setCurrentMarkerLatLon}) => {
 
-   const [collapsedTitle, setCollapsedTitle] = useState(true);
+   const [collapsedTitle, setCollapsedTitle] = useState(true); // TEMP
 
    return (
-      <div className={s.card} onClick={() => {setObjectDetailsActive(true); setCurrentObject(id);}}>
+      <div className={s.card}
+           onMouseEnter={() => {
+              setCurrentMarkerLatLon(
+                 {
+                    lon:lon,
+                    lat:lat
+                 }
+              );
+           }}
+           onClick={() => {
+            setObjectDetailsActive(true);
+            setCurrentObject(id);}
+           }>
          <img className={s.objectIcon} src="../assets/icons/object-types/house.svg" alt="object type"/>
          <h4 className={s.title} onClick={() => setCollapsedTitle(!collapsedTitle)}>
             {
@@ -19,7 +31,7 @@ const ObjectCard = ({name, category, cc, setObjectDetailsActive, id, setCurrentO
             {category}
          </p>
          <p className={s.description}>
-            Капітальний ремонт • СС {cc} • 30 м²
+            Капітальний ремонт &middot; СС {cc} &middot; 30 м<sup>2</sup>
          </p>
       </div>
    )

@@ -5,9 +5,19 @@ import MapboxWorker from 'worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker';
 
 MapboxWorker(); //TEMP
 
-   const REACT_APP_MAPBOX_TOKEN = 'pk.eyJ1IjoiYWltYXAiLCJhIjoiY2tzaXBsY3VmMGNkdjJvbmNpajd4bzNsdSJ9.ob9hYvyUocVZ343tQy2wSg';
+const REACT_APP_MAPBOX_TOKEN = 'pk.eyJ1IjoiYWltYXAiLCJhIjoiY2tzaXBsY3VmMGNkdjJvbmNpajd4bzNsdSJ9.ob9hYvyUocVZ343tQy2wSg';
 
-   const Map = ({filterBarActive, setCurrentObject, setObjectDetailsActive, setFilterBarActive}) => {
+let activeMarker;
+
+const Map = ({
+                filterBarActive,
+                setCurrentObject,
+                setObjectDetailsActive,
+                setFilterBarActive,
+                currentMarkerLatLon,
+                removedMarkers
+             }) => {
+
 
    mapboxgl.accessToken = REACT_APP_MAPBOX_TOKEN;
 
@@ -37,15 +47,13 @@ MapboxWorker(); //TEMP
             url: 'mapbox://aimap.test-tileset2',
          });
 
-         // map.current.setLayoutProperty("test-tileset2", 'visibility', 'none');
-
          map.current.addLayer({
             'id': 'point',
             'source': 'test-tileset2',
             'type': 'circle',
             'source-layer': 'test_tileset',
             'paint': {
-               'circle-radius': 10,
+               'circle-radius': 5,
                'circle-color': '#555',
                'circle-stroke-width': 2,
                'circle-stroke-color': "#fff"
@@ -55,7 +63,6 @@ MapboxWorker(); //TEMP
                // ['in', 'aimap_classifier', "Будинки житлові багатоквартирні"]
             ]
          });
-
       });
 
       // Autofocus
@@ -93,7 +100,7 @@ MapboxWorker(); //TEMP
                             ${currentFeature.properties.build_num}
                             &middot;
                             ${currentFeature.properties.construction_type}
-                            &middot 
+                            &middot; 
                             <!-- // TEMP -->
                             CC1
                             &middot;
@@ -108,12 +115,14 @@ MapboxWorker(); //TEMP
 
       }
 
-      map.current.on('mouseleave', 'point', function() {
+
+      // Marker Event Handlers --------------------------------
+
+      map.current.on('mouseleave', 'point', function () {
          map.current.getCanvas().style.cursor = '';
          popup.remove();
       });
 
-      // Marker Hover Handler
       map.current.on('mouseenter', 'point', function (e) {
          map.current.getCanvas().style.cursor = 'pointer';
          /* Determine if a feature in the "locations" layer exists at that point. */
@@ -121,13 +130,11 @@ MapboxWorker(); //TEMP
             layers: ['point']
          });
 
-
          if (features.length) {
             const clickedPoint = features[0];
             createPopUp(clickedPoint);
          }
       });
-
 
       // Marker Click Handler
       map.current.on('click', function (e) {
@@ -147,13 +154,48 @@ MapboxWorker(); //TEMP
          }
 
       });
-   });
+      // Marker Event Handlers --------------------------------
 
-   // Temp
+   });
+   let activeMarker = null;
+
+   useEffect(() => {
+
+      activeMarker = new mapboxgl.Marker({
+         color: "#ff0000"
+      }).setLngLat([30, 50])
+         .addTo(map.current);
+
+      activeMarker.setLngLat([currentMarkerLatLon.lon, currentMarkerLatLon.lat]);
+
+      console.log(currentMarkerLatLon.lon);
+      console.log(currentMarkerLatLon.lat);
+
+
+   }, [currentMarkerLatLon]);
+
+
+   // useEffect(() => {
+   //
+   //
+   //    activeMarker.setLngLat([currentMarkerLatLon.lon, currentMarkerLatLon.lat]);
+   //
+   //    console.log(currentMarkerLatLon.lon);
+   //    console.log(currentMarkerLatLon.lat);
+   //
+   // }, [currentMarkerLatLon]);
+
+
+
+
+   // Map rerender notification
    console.log('Map rerender ❤️‍🔥');
 
    return (
-      <div ref={mapContainer} className={`${s.mapContainer} ${filterBarActive ? s.shrink : s.grow}`}/>
+      <div
+         ref={mapContainer}
+         className={`${s.mapContainer} ${filterBarActive ? s.shrink : s.grow}`}
+      />
    )
 };
 
