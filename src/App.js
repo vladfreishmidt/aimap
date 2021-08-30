@@ -10,17 +10,13 @@ import {Route} from "react-router-dom";
 
 function App() {
 
-
    const URL = "https://app.aimapa.com/objects/";
-
 
    // Active marker state
    const [currentMarkerLatLon, setCurrentMarkerLatLon] = useState({
       lon: 0,
       lat: 0
    });
-
-
 
    // App initial state
    const [searchText, setSearchText] = useState("");
@@ -34,12 +30,8 @@ function App() {
    });
 
    const [objects, setObject] = useState([])
-
-
    const [filterBarActive, setFilterBarActive] = useState(true);
-
    const [objectDetailsActive, setObjectDetailsActive] = useState(false);
-
    const [objectDetailedInfo, setObjectDetailsInfo] = useState({
       name: 'property_001test'
    });

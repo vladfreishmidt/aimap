@@ -3,7 +3,7 @@ import s from './ObjectDetails.module.css';
 
 const ObjectDetails = ({setObjectDetailsActive, objectDetailedInfo}) => {
    const [activeTab, setActiveTab] = useState('details');
-
+   console.log(objectDetailedInfo)
    return (
       <div className={s.objectDetails}>
          <div className={s.header}>
@@ -18,7 +18,7 @@ const ObjectDetails = ({setObjectDetailsActive, objectDetailedInfo}) => {
             <div className={s.bottom}>
                <h4 className={s.title}>
                   HARD CODED TEXT
-                 {objectDetailedInfo.object.name}
+                 {/*{objectDetailedInfo.properties.name}*/}
                </h4>
                <p className={s.description}>
                   HARD CODED TEXT
