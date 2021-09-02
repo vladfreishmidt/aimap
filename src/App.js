@@ -173,10 +173,10 @@ function App() {
          <div className="page-container">
 
             {/*ReactMapGl*/}
-            <Route path="/react-map" render={() => <RMap filterBarActive={filterBarActive} currObj={currObj} setCurrObj={setCurrObj} setCurrentObject={setCurrentObject} setFilterBarActive={setFilterBarActive} setObjectDetailsActive={setObjectDetailsActive} currentMarkerLatLon={currentMarkerLatLon} viewport={viewport} setViewport={setViewport} selectedObjTypeFilters={selectedObjTypeFilters} />} />
+            <Route path="/map" render={() => <RMap filterBarActive={filterBarActive} currObj={currObj} setCurrObj={setCurrObj} setCurrentObject={setCurrentObject} setFilterBarActive={setFilterBarActive} setObjectDetailsActive={setObjectDetailsActive} currentMarkerLatLon={currentMarkerLatLon} viewport={viewport} setViewport={setViewport} selectedObjTypeFilters={selectedObjTypeFilters} />} />
 
             {/* MAP Component */}
-            <Route
+            {/* <Route
                path="/map"
                render={() => <Map
                   filterBarActive={filterBarActive}
@@ -192,10 +192,10 @@ function App() {
                   setMapLayerId={setMapLayerId}
                   mapLayerId={mapLayerId}
                />}
-            />
+            /> */}
 
             {/* MAP UI */}
-            <Route path="/react-map" render={() =>
+            <Route path="/map" render={() =>
                <MapUI
                   filterBarActive={filterBarActive}
                   setFilterBarActive={setFilterBarActive}
