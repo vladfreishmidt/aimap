@@ -7,16 +7,26 @@ import ObjectDetails from "./ObjectDetails/ObjectDetails";
 
 
 const FilterBar = ({
-                      setSearchText,
-                      searchText,
-                      objects,
-                      objectDetailsActive,
-                      setObjectDetailsActive,
-                      objectDetailedInfo,
-                      setCurrentObject,
-                      setCurrentMarkerLatLon,
-                      setRemovedMarkers
-                   }) => {
+   setSearchText,
+   searchText,
+   objects,
+   objectDetailsActive,
+   setObjectDetailsActive,
+   objectDetailedInfo,
+   setCurrentObject,
+   setCurrentMarkerLatLon,
+   setRemovedMarkers,
+   selectedObjTypeFilters,
+   setSelectedObjTypeFilters,
+   getFilteredResults,
+   getDefaultSearchResults,
+   setClickedFilterBtn,
+   objectsFoundTotal,
+   viewport,
+   setViewport,
+   getDefaultResults,
+   setObjectsFoundTotal
+}) => {
 
 
    return (
@@ -30,6 +40,13 @@ const FilterBar = ({
             <Filters
                setSearchText={setSearchText}
                searchText={searchText}
+               selectedObjTypeFilters={selectedObjTypeFilters}
+               setSelectedObjTypeFilters={setSelectedObjTypeFilters}
+               getFilteredResults={getFilteredResults}
+               getDefaultSearchResults={getDefaultSearchResults}
+               setClickedFilterBtn={setClickedFilterBtn}
+               getDefaultResults={getDefaultResults}
+               setObjectsFoundTotal={setObjectsFoundTotal}
             />
          }
 
@@ -44,6 +61,8 @@ const FilterBar = ({
                setObjectDetailsActive={setObjectDetailsActive}
                setCurrentMarkerLatLon={setCurrentMarkerLatLon}
                setRemovedMarkers={setRemovedMarkers}
+               viewport={viewport}
+               setViewport={setViewport}
             />
 
          }
@@ -55,11 +74,17 @@ const FilterBar = ({
             <ObjectDetails
                setObjectDetailsActive={setObjectDetailsActive}
                objectDetailedInfo={objectDetailedInfo}
+               selectedObjTypeFilters={selectedObjTypeFilters}
+               setCurrentMarkerLatLon={setCurrentMarkerLatLon}
+               setViewport={setViewport}
             />
          }
 
          {/* Download Component */}
-         <DownloadResults objectDetailsActive={objectDetailsActive}/>
+         <DownloadResults
+            objectDetailsActive={objectDetailsActive}
+            objectsFoundTotal={objectsFoundTotal}
+         />
       </div>
 
    )

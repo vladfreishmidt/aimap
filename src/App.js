@@ -1,16 +1,56 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import './App.css';
 import Map from './components/Map/Map';
 import Navbar from "./components/Navbar/Navbar";
 import Dashboard from "./components/Dashboard/Dashboard";
 import MapUI from "./components/MapUI/MapUI";
-import {Route} from "react-router-dom";
-
-
+import { Route } from "react-router-dom";
+import RMap from './components/RMap/RMap';
 
 function App() {
 
-   const URL = "https://app.aimapa.com/objects/";
+
+   const [viewport, setViewport] = useState({
+      latitude: 49.724479188712984,
+      longitude: 30.8935546875,
+      zoom: 5
+   });
+   // -------------
+
+
+   const [objects, setObject] = useState([]);
+   const [objectsFoundTotal, setObjectsFoundTotal] = useState(0);
+
+   const [currObj, setCurrObj] = useState(null);
+
+   const [filterBarActive, setFilterBarActive] = useState(true);
+   const [objectDetailsActive, setObjectDetailsActive] = useState(false);
+   const [objectDetailsInfo, setObjectDetailsInfo] = useState({
+      name: 'property_001test',
+      lat: 28,
+      lon: 48,
+   });
+
+   const [mapLayerId, setMapLayerId] = useState();
+
+   const [defaultLayer, setDefaultLayer] = useState({
+      'id': 'point',
+      'source': 'test-tileset2',
+      'type': 'circle',
+      'source-layer': 'test_tileset',
+      'paint': {
+         'circle-radius': 5,
+         'circle-color': '#555',
+         'circle-stroke-width': 2,
+         'circle-stroke-color': "#fff"
+      }
+   });
+
+   // Current Object ID state
+   const [currentObjectId, setCurrentObject] = useState("1b679708a7c9da0243c725688ad8903b");
+
+   // Search Input State
+   const [searchText, setSearchText] = useState("");
 
    // Active marker state
    const [currentMarkerLatLon, setCurrentMarkerLatLon] = useState({
@@ -18,48 +58,24 @@ function App() {
       lat: 0
    });
 
-   // App initial state
-   const [searchText, setSearchText] = useState("");
+   // Filter: Object Typer
+   const [selectedObjTypeFilters, setSelectedObjTypeFilters] = useState([]);
 
-   const [viewport, setViewport] = useState({
-      longitude: 30.5234,
-      latitude: 50.4501,
-      width: "100%",
-      height: "100vh",
-      zoom: 14,
-   });
-
-   const [objects, setObject] = useState([])
-   const [filterBarActive, setFilterBarActive] = useState(true);
-   const [objectDetailsActive, setObjectDetailsActive] = useState(false);
-   const [objectDetailedInfo, setObjectDetailsInfo] = useState({
-      name: 'property_001test'
-   });
-
-
-   // Current Object ID state
-
-   const [currentObjectId, setCurrentObject] = useState('46468c14392f01af54344f2dce7fa03d');
+   const URL = "https://app.aimapa.com/objects/";
 
    // Obj count for objects list
-   const countObj = 100;
+   const countObj = 20;
 
-   // Fetch Objects List
+   const [clickedFilterBtn, setClickedFilterBtn] = useState(false);
 
-
-   useEffect(() => {
+   const getDefaultResults = () => {
       const reqObjBody = {
          "limit": countObj,
          "offset": 0,
-         "aimap_classifier": ["Будівлі АПК", "Гаражі, стоянки, СТО"],
-         "stage_documentation": ["повідомлення про початок виконання будівельних робіт"],
-         "from_date": "2021-07-01",
-         "to_date": "2021-08-31"
       };
 
       fetch(URL, {
          method: "POST",
-
          headers: {
             'Content-Type': 'application/json',
             'Accept': '*/*',
@@ -70,91 +86,144 @@ function App() {
          .then(data => data.json())
          .then((data) => setObject(data.objects))
          .catch(err => console.log(err));
+   }
+
+   // FETCH default objects List
+   useEffect(() => {
+      getDefaultResults();
    }, []);
 
+   // FETCH OBJECT DETAILS BY ID
+   useEffect(() => {
+      const reqObjBody = {
+         "hash_id": currentObjectId
+      };
 
-   // fetch Get Object By ID
-   const getObjectDetailedInfo = () => {
-      fetch(urlObjectId, {
-         method: 'POST'
+      fetch('https://app.aimapa.com/object/', {
+         method: "POST",
+         headers: {
+            'Content-Type': 'application/json',
+            'Accept': '*/*',
+         },
+         body: JSON.stringify(reqObjBody)
       })
          .then(data => data.json())
          .then((data) => setObjectDetailsInfo(data.object))
          .catch(err => console.log(err));
+   }, [currentObjectId]);
+
+   // FETCH -- get default results
+   const getDefaultSearchResults = () => {
+      const reqObjBody = {
+         "limit": countObj,
+         "offset": 0,
+         "aimap_classifier": selectedObjTypeFilters
+         // "stage_documentation": ["повідомлення про початок виконання будівельних робіт"],
+      };
+      fetch(URL, {
+         method: 'POST',
+      })
    }
 
-   // Temp 'Object_By_ID' query string
-   const urlObjectId = ` https://app.aimapa.com/object/`;
+   // FETCH -- FILTERED objects List
+   const getFilteredResults = () => {
+      const classifierFilter = selectedObjTypeFilters && `"aimap_classifier": ${selectedObjTypeFilters}`
 
-   // Fetch Object Details
-   useEffect(() => {
-      if (urlObjectId === null) {
-         return;
-      } else {
-         fetch(urlObjectId, {
-            method: 'POST',
-            body:
-               {
-                  "hash_id": "1b679708a7c9da0243c725688ad8903b"
-               }
+      const reqObjBody = {
+         "limit": 20,
+         "offset": 0,
+         "aimap_classifier": selectedObjTypeFilters
+         // "stage_documentation": ["повідомлення про початок виконання будівельних робіт"],
+      };
+
+      fetch(URL, {
+         method: "POST",
+         headers: {
+            'Content-Type': 'application/json',
+            'Accept': '*/*',
+         },
+         body: JSON.stringify(reqObjBody)
+      })
+         .then(data => data.json())
+         .then((data) => setObject(data.objects))
+         .catch(err => console.log(err));
+
+      fetch(URL, {
+         method: "POST",
+         headers: {
+            'Content-Type': 'application/json',
+            'Accept': '*/*',
+         },
+         body: JSON.stringify({
+            "aimap_classifier": selectedObjTypeFilters
          })
-            .then(res => res.json())
-            .then(
-               res => setObjectDetailsInfo(res)
-            )
-            .catch(err => console.log(err));
-      }
+      })
+         .then(data => data.json())
+         .then((data) => setObjectsFoundTotal(data.count))
+         .catch(err => console.log(err));
+   };
 
-
-   }, [objectDetailsActive]);
-
-   console.log(`clicked hash_id: ${currentObjectId}`);
 
    return (
       <div className="app-wrapper">
 
          {/* APP NAVIGATION */}
-         <Navbar/>
+         <Navbar />
 
          <div className="page-container">
+
+            {/*ReactMapGl*/}
+            <Route path="/react-map" render={() => <RMap filterBarActive={filterBarActive} currObj={currObj} setCurrObj={setCurrObj} setCurrentObject={setCurrentObject} setFilterBarActive={setFilterBarActive} setObjectDetailsActive={setObjectDetailsActive} currentMarkerLatLon={currentMarkerLatLon} viewport={viewport} setViewport={setViewport} selectedObjTypeFilters={selectedObjTypeFilters} />} />
 
             {/* MAP Component */}
             <Route
                path="/map"
                render={() => <Map
-                  viewport={viewport}
-                  setViewport={setViewport}
                   filterBarActive={filterBarActive}
                   setObjectDetailsActive={setObjectDetailsActive}
                   setFilterBarActive={setFilterBarActive}
                   setCurrentObject={setCurrentObject}
                   currentMarkerLatLon={currentMarkerLatLon}
-                  currentMarkerLatLon={currentMarkerLatLon}
-
+                  objectDetailsInfo={objectDetailsInfo}
+                  objectDetailsActive={objectDetailsActive}
+                  selectedObjTypeFilters={selectedObjTypeFilters}
+                  clickedFilterBtn={clickedFilterBtn}
+                  defaultLayer={defaultLayer}
+                  setMapLayerId={setMapLayerId}
+                  mapLayerId={mapLayerId}
                />}
             />
 
             {/* MAP UI */}
-            <Route path="/map" render={() =>
-
+            <Route path="/react-map" render={() =>
                <MapUI
                   filterBarActive={filterBarActive}
                   setFilterBarActive={setFilterBarActive}
-                  objects={objects} searchText={searchText}
+                  objects={objects}
+                  searchText={searchText}
                   setSearchText={setSearchText}
                   objectDetailsActive={objectDetailsActive}
                   setObjectDetailsActive={setObjectDetailsActive}
-                  objectDetailedInfo={objectDetailedInfo}
+                  objectDetailedInfo={objectDetailsInfo}
                   setCurrentObject={setCurrentObject}
                   setObjectDetailsInfo={setObjectDetailsInfo}
                   setCurrentMarkerLatLon={setCurrentMarkerLatLon}
-
+                  selectedObjTypeFilters={selectedObjTypeFilters}
+                  setSelectedObjTypeFilters={setSelectedObjTypeFilters}
+                  getFilteredResults={getFilteredResults}
+                  clickedFilterBtn={clickedFilterBtn}
+                  setClickedFilterBtn={setClickedFilterBtn}
+                  objectsFoundTotal={objectsFoundTotal}
+                  viewport={viewport}
+                  setViewport={setViewport}
+                  getDefaultResults={getDefaultResults}
+                  setObjectsFoundTotal={setObjectsFoundTotal}
                />
             }
             />
 
             {/* DASHBOARD */}
-            <Route path="/dashboard" render={() => <Dashboard/>}/>
+            <Route path="/dashboard" render={() => <Dashboard />} />
          </div>
       </div>
    );

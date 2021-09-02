@@ -145,6 +145,7 @@ tr.tabRow {
     line-height: 2.2rem;
     color: #1D1E24;
     min-width: 244px;
+    vertical-align: top;
 }
 
 .tabRow:last-child {
@@ -174,5 +175,18 @@ tr.tabRow {
     margin-top: 0;
 }
 
+.contactSubTitle {
+    /* Subhead 2/Semibold 16 */
+
+    font-family: Montserrat, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.6rem;
+    line-height: 2.0rem;
+    letter-spacing: 0.0016em;
+    color: #242731;
+    margin-top: 0;
+    margin-bottom: 16px;
+}
 
 

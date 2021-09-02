@@ -1,10 +1,22 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import s from "./ObjectTypeFilter.module.css";
 import ObjectTypeCard from './ObjectTypeCard/ObjectTypeCard';
 
-const ObjectTypeFilter = () => {
-   const [objectFilterActive, setObjectFilterActive] = useState(false);
-   
+const ObjectTypeFilter = ({
+   selectedObjTypeFilters,
+   setSelectedObjTypeFilters,
+   getFilteredResults,
+   getDefaultSearchResults,
+   setClickedFilterBtn,
+   objectFilterActive,
+   setObjectFilterActive,
+   setCCFilterActive,
+   getDefaultResults,
+   setObjectsFoundTotal
+}) => {
+
+
+
    const [filterOptionsData, setFilterOptionsData] = useState([
       {
          id: 1,
@@ -23,7 +35,7 @@ const ObjectTypeFilter = () => {
       },
       {
          id: 4,
-         name: "Торгові центри,  магазини",
+         name: "Торгові центри, магазини",
          icon: "http://localhost:3000/assets/icons/object-types/Markets.svg"
       },
       {
@@ -53,12 +65,22 @@ const ObjectTypeFilter = () => {
    }, [])
 
 
-   const [selectedObjTypeFilters, setSelectedObjTypeFilters] = useState([]);
-
    return (
       <div className={s.filterWrapper}>
          <button className={`${s.btn} ${objectFilterActive ? s.active : ''}`}
-                 onClick={() => setObjectFilterActive(curr => !curr)}>Тип об’єкту
+            onClick={() => {
+               setObjectFilterActive(curr => !curr);
+               setCCFilterActive(false);
+            }
+            }>
+            {
+               selectedObjTypeFilters.length > 0
+
+               &&
+
+               (<span className={s.filtersCount}>{selectedObjTypeFilters.length}</span>)
+            }
+            Тип об’єкту
          </button>
          {
             objectFilterActive
@@ -73,12 +95,35 @@ const ObjectTypeFilter = () => {
                      setSelectedObjTypeFilters={setSelectedObjTypeFilters}
                      selectedObjTypeFilters={selectedObjTypeFilters}
 
-                     />)
+                  />)
                   }
                </div>
                <div className={s.applyBtns}>
-                  <button className={s.clearFiltersBtn}>Очистити</button>
-                  <button className={s.applyFiltersBtn}>Застосувати</button>
+                  <button
+                     className={s.clearFiltersBtn}
+                     onClick={() => setSelectedObjTypeFilters([])}
+                  >
+                     Очистити
+                  </button>
+                  <button
+                     className={s.applyFiltersBtn}
+                     onClick={() => {
+                        if (selectedObjTypeFilters.length !== 0) {
+                           getFilteredResults();
+                        }
+                        setObjectFilterActive(false);
+                        setClickedFilterBtn(curr => !curr)
+
+                        if (selectedObjTypeFilters.length === 0) {
+                           getDefaultResults();
+                           setObjectsFoundTotal(0);
+                        }
+
+
+                     }}
+                  >
+                     Застосувати
+                  </button>
                </div>
             </div>
          }
