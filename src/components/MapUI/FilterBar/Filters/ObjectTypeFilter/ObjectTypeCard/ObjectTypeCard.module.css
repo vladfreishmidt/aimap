@@ -17,18 +17,6 @@
 }
 
 .icon {
-<<<<<<< HEAD
-    width: 56px;
-    height: 56px;
-    border: 1px solid #AEB1B5;
-    border-radius: 4px;
-    margin-right: 8px;
-    flex: 0 0 56px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-=======
   width: 56px;
   height: 56px;
   border: 1px solid #aeb1b5;
@@ -39,7 +27,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
->>>>>>> new-endpoint
 }
 
 .name {

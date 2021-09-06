@@ -19,11 +19,7 @@ const ObjectTypeCard = ({ option, setSelectedObjTypeFilters, selectedObjTypeFilt
    return (
       <div style={option.name === 'Спортзали, спорт. майданчики' ? inActive : option.name === 'Ресторани, кафе, їдальні' ? inActive : option.name === 'Торгові центри, магазини' ? inActive : {}} className={`${s.objectCard} ${selectedObjTypeFilters.includes(option.name) ? s.active : ""}`} onClick={() => handleFilterToggle()}>
          <div className={s.icon}>
-<<<<<<< HEAD
-            <img src={option.icon} alt="object type"/>
-=======
             <img src={option.icon} alt="object type" />
->>>>>>> new-endpoint
          </div>
          <div className={s.name}>
             {option.name}

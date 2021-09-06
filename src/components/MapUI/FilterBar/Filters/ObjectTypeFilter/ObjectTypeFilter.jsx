@@ -35,11 +35,7 @@ const ObjectTypeFilter = ({
       },
       {
          id: 4,
-<<<<<<< HEAD
          name: "Торгові центри,  магазини",
-=======
-         name: "Торгові центри, магазини",
->>>>>>> new-endpoint
          icon: "http://localhost:3000/assets/icons/object-types/Markets.svg"
       },
       {
