@@ -16,12 +16,11 @@ body {
 }
 
 :root {
-  --box-shadow: inset -1px -1px 1px #d7d9db;
-  --text-primary-dark: #242731;
-  --text-gradient-primary: -webkit-linear-gradient(#f78d61, #ed6044);
+    --box-shadow: inset -1px -1px 1px #d7d9db;
+    --text-primary-dark: #242731;
+    --text-gradient-primary: -webkit-linear-gradient(#f78d61, #ed6044);
 }
 
-// POP-UP
 .popUpClassifier .popTitle {
   font-family: Roboto, sans-serif;
   font-style: normal;

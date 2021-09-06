@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import s from '../CCFilter/CCFilter.module.css';
 
-const CCFilter = () => {
-   const [CCFilterActive, setCCFilterActive] = useState(false);
+const CCFilter = ({ setObjectFilterActive, CCFilterActive, setCCFilterActive }) => {
+
 
    return (
       <div className={s.filterWrapper}>
@@ -20,12 +20,12 @@ const CCFilter = () => {
 
             <div className={s.filterBody}>
                <div className={s.filterOptions}>
-                  <div className={s.info}>
-                     <img src="http://localhost:3000/assets/icons/cc-info.svg" alt="i" />
+                  {/* <div className={s.info}>
+                     <img src="http://localhost:3000/assets/icons/cc-info.svg" alt="info" />
                      <span>
                         Клас наслідків визначає значимість будуємого об’єкту.
                      </span>
-                  </div>
+                  </div> */}
 
                   <div className={s.formGroup}>
                      <label htmlFor="c1">

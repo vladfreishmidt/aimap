@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import './App.css';
 import Map from './components/Map/Map';
 import Navbar from "./components/Navbar/Navbar";
 import Dashboard from "./components/Dashboard/Dashboard";
 import MapUI from "./components/MapUI/MapUI";
-import { Route } from "react-router-dom";
+import {Route, Switch} from "react-router-dom";
 import RMap from './components/RMap/RMap';
+import Home from './components/Home/Home';
+import {useQuery} from 'react-query';
 
 function App() {
-
 
    const [viewport, setViewport] = useState({
       latitude: 49.724479188712984,
@@ -16,7 +17,6 @@ function App() {
       zoom: 5
    });
    // -------------
-
 
    const [objects, setObject] = useState([]);
    const [objectsFoundTotal, setObjectsFoundTotal] = useState(0);
@@ -32,7 +32,6 @@ function App() {
    });
 
    const [mapLayerId, setMapLayerId] = useState();
-
    const [defaultLayer, setDefaultLayer] = useState({
       'id': 'point',
       'source': 'test-tileset2',
@@ -88,10 +87,9 @@ function App() {
          .catch(err => console.log(err));
    }
 
-   // FETCH default objects List
-   useEffect(() => {
-      getDefaultResults();
-   }, []);
+   // React Query
+      const {status, error, data} = useQuery('dataDefault', getDefaultResults);
+
 
    // FETCH OBJECT DETAILS BY ID
    useEffect(() => {
@@ -118,7 +116,6 @@ function App() {
          "limit": countObj,
          "offset": 0,
          "aimap_classifier": selectedObjTypeFilters
-         // "stage_documentation": ["повідомлення про початок виконання будівельних робіт"],
       };
       fetch(URL, {
          method: 'POST',
@@ -133,7 +130,6 @@ function App() {
          "limit": 20,
          "offset": 0,
          "aimap_classifier": selectedObjTypeFilters
-         // "stage_documentation": ["повідомлення про початок виконання будівельних робіт"],
       };
 
       fetch(URL, {
@@ -167,63 +163,62 @@ function App() {
    return (
       <div className="app-wrapper">
 
-         {/* APP NAVIGATION */}
-         <Navbar />
+         {/* NAVIGATION BAR */}
+         <Navbar/>
 
          <div className="page-container">
 
-            {/*ReactMapGl*/}
-            <Route path="/map" render={() => <RMap filterBarActive={filterBarActive} currObj={currObj} setCurrObj={setCurrObj} setCurrentObject={setCurrentObject} setFilterBarActive={setFilterBarActive} setObjectDetailsActive={setObjectDetailsActive} currentMarkerLatLon={currentMarkerLatLon} viewport={viewport} setViewport={setViewport} selectedObjTypeFilters={selectedObjTypeFilters} />} />
+            <Switch>
+               {/* HOME*/}
+               <Route exact path="/" component={Home}/>
 
-            {/* MAP Component */}
-            {/* <Route
-               path="/map"
-               render={() => <Map
-                  filterBarActive={filterBarActive}
-                  setObjectDetailsActive={setObjectDetailsActive}
-                  setFilterBarActive={setFilterBarActive}
-                  setCurrentObject={setCurrentObject}
-                  currentMarkerLatLon={currentMarkerLatLon}
-                  objectDetailsInfo={objectDetailsInfo}
-                  objectDetailsActive={objectDetailsActive}
-                  selectedObjTypeFilters={selectedObjTypeFilters}
-                  clickedFilterBtn={clickedFilterBtn}
-                  defaultLayer={defaultLayer}
-                  setMapLayerId={setMapLayerId}
-                  mapLayerId={mapLayerId}
-               />}
-            /> */}
-
-            {/* MAP UI */}
-            <Route path="/map" render={() =>
-               <MapUI
-                  filterBarActive={filterBarActive}
-                  setFilterBarActive={setFilterBarActive}
-                  objects={objects}
-                  searchText={searchText}
-                  setSearchText={setSearchText}
-                  objectDetailsActive={objectDetailsActive}
-                  setObjectDetailsActive={setObjectDetailsActive}
-                  objectDetailedInfo={objectDetailsInfo}
-                  setCurrentObject={setCurrentObject}
-                  setObjectDetailsInfo={setObjectDetailsInfo}
-                  setCurrentMarkerLatLon={setCurrentMarkerLatLon}
-                  selectedObjTypeFilters={selectedObjTypeFilters}
-                  setSelectedObjTypeFilters={setSelectedObjTypeFilters}
-                  getFilteredResults={getFilteredResults}
-                  clickedFilterBtn={clickedFilterBtn}
-                  setClickedFilterBtn={setClickedFilterBtn}
-                  objectsFoundTotal={objectsFoundTotal}
-                  viewport={viewport}
-                  setViewport={setViewport}
-                  getDefaultResults={getDefaultResults}
-                  setObjectsFoundTotal={setObjectsFoundTotal}
+               {/* REACT MAP GL */}
+               <Route
+                  path="/map"
+                  render={() =>
+                     <>
+                        <RMap
+                           filterBarActive={filterBarActive}
+                           currObj={currObj}
+                           setCurrObj={setCurrObj}
+                           setCurrentObject={setCurrentObject}
+                           setFilterBarActive={setFilterBarActive}
+                           setObjectDetailsActive={setObjectDetailsActive}
+                           currentMarkerLatLon={currentMarkerLatLon}
+                           viewport={viewport}
+                           setViewport={setViewport}
+                           selectedObjTypeFilters={selectedObjTypeFilters}
+                        />
+                        <MapUI
+                           filterBarActive={filterBarActive}
+                           setFilterBarActive={setFilterBarActive}
+                           objects={objects}
+                           searchText={searchText}
+                           setSearchText={setSearchText}
+                           objectDetailsActive={objectDetailsActive}
+                           setObjectDetailsActive={setObjectDetailsActive}
+                           objectDetailedInfo={objectDetailsInfo}
+                           setCurrentObject={setCurrentObject}
+                           setObjectDetailsInfo={setObjectDetailsInfo}
+                           setCurrentMarkerLatLon={setCurrentMarkerLatLon}
+                           selectedObjTypeFilters={selectedObjTypeFilters}
+                           setSelectedObjTypeFilters={setSelectedObjTypeFilters}
+                           getFilteredResults={getFilteredResults}
+                           clickedFilterBtn={clickedFilterBtn}
+                           setClickedFilterBtn={setClickedFilterBtn}
+                           objectsFoundTotal={objectsFoundTotal}
+                           viewport={viewport}
+                           setViewport={setViewport}
+                           // getDefaultResults={getDefaultResults}
+                           setObjectsFoundTotal={setObjectsFoundTotal}
+                        />
+                     </>
+                  }
                />
-            }
-            />
 
-            {/* DASHBOARD */}
-            <Route path="/dashboard" render={() => <Dashboard />} />
+               {/* DASHBOARD */}
+               <Route path="/dashboard" render={() => <Dashboard/>}/>
+            </Switch>
          </div>
       </div>
    );
