@@ -3,16 +3,28 @@ import FilterBar from "./FilterBar/FilterBar";
 import ProfileMenu from "./ProfileMenu/ProfileMenu";
 
 const MapUI = ({
-                  setSearchText,
-                  searchText,
-                  objects,
-                  filterBarActive,
-                  setFilterBarActive,
-                  objectDetailsActive,
-                  setObjectDetailsActive,
-                  objectDetailedInfo,
-                  setCurrentObject
-               }) => {
+   setSearchText,
+   searchText,
+   objects,
+   filterBarActive,
+   setFilterBarActive,
+   objectDetailsActive,
+   setObjectDetailsActive,
+   objectDetailedInfo,
+   setCurrentObject,
+   setCurrentMarkerLatLon,
+   setRemovedMarkers,
+   selectedObjTypeFilters,
+   setSelectedObjTypeFilters,
+   getFilteredResults,
+   getDefaultSearchResults,
+   setClickedFilterBtn,
+   objectsFoundTotal,
+   viewport,
+   setViewport,
+   getDefaultResults,
+   setObjectsFoundTotal
+}) => {
    return (
       <>
          {/* FilterBar Component */}
@@ -28,6 +40,18 @@ const MapUI = ({
                setObjectDetailsActive={setObjectDetailsActive}
                objectDetailedInfo={objectDetailedInfo}
                setCurrentObject={setCurrentObject}
+               setCurrentMarkerLatLon={setCurrentMarkerLatLon}
+               setRemovedMarkers={setRemovedMarkers}
+               selectedObjTypeFilters={selectedObjTypeFilters}
+               setSelectedObjTypeFilters={setSelectedObjTypeFilters}
+               getFilteredResults={getFilteredResults}
+               getDefaultSearchResults={getDefaultSearchResults}
+               setClickedFilterBtn={setClickedFilterBtn}
+               objectsFoundTotal={objectsFoundTotal}
+               viewport={viewport}
+               setViewport={setViewport}
+               getDefaultResults={getDefaultResults}
+               setObjectsFoundTotal={setObjectsFoundTotal}
             />
          }
 

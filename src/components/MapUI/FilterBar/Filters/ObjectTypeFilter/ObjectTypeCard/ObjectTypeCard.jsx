@@ -1,21 +1,29 @@
 import React from 'react';
 import s from './ObjectTypeCard.module.css';
 
-const ObjectTypeCard = ({option, setSelectedFilter, selectedFilters}) => {
+const ObjectTypeCard = ({ option, setSelectedObjTypeFilters, selectedObjTypeFilters }) => {
 
    const handleFilterToggle = () => {
-      if (selectedFilters.includes(option.name)) {
-         setSelectedFilter(curr => curr.filter(item => item !== option.name));
+      if (selectedObjTypeFilters.includes(option.name)) {
+         setSelectedObjTypeFilters(curr => curr.filter(item => item !== option.name));
       } else {
-         setSelectedFilter(curr => [...curr, option.name]);
+         setSelectedObjTypeFilters(curr => [...curr, option.name]);
       }
    }
 
+   const inActive = {
+      pointerEvents: 'none',
+      opacity: '0.3'
+   }
 
    return (
-         <div className={`${s.objectCard} ${selectedFilters.includes(option.name) ? s.active : ""}`} onClick={() => handleFilterToggle()}>
+      <div style={option.name === 'Спортзали, спорт. майданчики' ? inActive : option.name === 'Ресторани, кафе, їдальні' ? inActive : option.name === 'Торгові центри, магазини' ? inActive : {}} className={`${s.objectCard} ${selectedObjTypeFilters.includes(option.name) ? s.active : ""}`} onClick={() => handleFilterToggle()}>
          <div className={s.icon}>
+<<<<<<< HEAD
             <img src={option.icon} alt="object type"/>
+=======
+            <img src={option.icon} alt="object type" />
+>>>>>>> new-endpoint
          </div>
          <div className={s.name}>
             {option.name}

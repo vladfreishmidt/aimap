@@ -1,85 +1,126 @@
 .app-wrapper {
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: space-between;
-    overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
 }
 
 .page-container {
-    width: 100%;
-    height: auto;
-    position: relative;
+  width: 100%;
+  height: auto;
+  position: relative;
 }
-
 
 /* Marker Pop-up start */
 
 .mapboxgl-popup {
-    top: -15px;
-    min-width: 316px;
-    max-width: none !important;
-    box-shadow: 0 10px 18px rgba(9, 30, 66, 0.15), 0 0 1px rgba(9, 30, 66, 0.31);
-    cursor: pointer;
+  top: -15px;
+  min-width: 316px;
+  max-width: none !important;
+  box-shadow: 0 10px 18px rgba(9, 30, 66, 0.15), 0 0 1px rgba(9, 30, 66, 0.31);
+  cursor: pointer;
 }
 
 .mapboxgl-popup-tip {
-    display: none;
+  display: none;
 }
 
 .marker .classifier {
-    font-family: Montserrat, sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 1.4rem;
-    line-height: 2.4rem;
-    color: #575F6E;
-    margin-bottom: 12px;
+  font-family: Montserrat, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.4rem;
+  line-height: 2.4rem;
+  color: #575f6e;
+  margin-bottom: 12px;
 }
 
 .marker .name {
-    font-family: Montserrat, sans-serif;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 1.7rem;
-    line-height: 2.8rem;
-    color: #242731;
+  font-family: Montserrat, sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.7rem;
+  line-height: 2.8rem;
+  color: #242731;
 }
 
 .marker .address {
-    font-family: Montserrat, sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 1.4rem;
-    line-height: 2.0rem;
-    color: #575F6E;
+  font-family: Montserrat, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.4rem;
+  line-height: 2rem;
+  color: #575f6e;
 }
 
 .marker .icon {
-    width: 46px;
-    height: 46px;
-    background-image: url(http://localhost:3000/assets/icons/object-types/transport.svg);
+  width: 46px;
+  height: 46px;
+  background-image: url(http://localhost:3000/assets/icons/object-types/transport.svg);
 }
 
 .marker .header {
-    display: flex;
+  display: flex;
 }
 
 .header .text {
-    max-width: 230px;
-    margin-right: 24px;
+  max-width: 230px;
+  margin-right: 24px;
 }
 
 .mapboxgl-popup-content {
-    max-width: 316px;
-    padding: 12px 8px !important;
+  max-width: 450px;
+  padding: 12px 8px !important;
+}
+
+.mapboxgl-popup-content .popUpClassifier {
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+  margin-top: 4px;
+  color: #575f6e;
+}
+
+.mapboxgl-popup-content .construction_type {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  /* identical to box height, or 150% */
+
+  /* Secondary/Grey 2 */
+  margin-top: 10px;
+  color: #575f6e;
+}
+
+.mapboxgl-popup-close-button {
+  display: none;
 }
 
 /* Marker Pop-up end */
 
-
 /* Map canvas */
 .mapboxgl-canvas {
-    width: 100%;
-    height: auto;
+  width: 100%;
+  height: auto;
+}
+
+.markerActive {
+  background-color: red;
+  width: 20px;
+  height: 20px;
+}
+
+.mapWrapper {
+  width: 100%;
+  margin-left: auto;
+}
+
+.mapWrapper.small {
+  width: calc(100% - 560px);
+  transition: width 0.2s ease-out;
 }

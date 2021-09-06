@@ -16,12 +16,16 @@
     border-radius: 4px;
     margin-right: 16px;
     cursor: pointer;
+    position: relative;
 }
 
 .btn.active {
     background: #F5F5F7;
-    /* Primary/Dark blue */
+    border: 2px solid #242731;
+}
 
+.btn:hover {
+    background: #F5F5F7;
     border: 2px solid #242731;
 }
 
@@ -75,6 +79,7 @@
     border-radius: 4px;
     border: none;
     cursor: pointer;
+    position: relative;
 }
 
 .applyFiltersBtn:active {
@@ -92,4 +97,27 @@
     background-color: transparent;
     border: none;
     cursor: pointer;
+    position: relative;
+}
+
+.filtersCount {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color: #fff;
+    width: 18px;
+    height: 18px;
+    background: linear-gradient(109.8deg, #F78D61 0%, #ED6044 100%);
+
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.4rem;
+    line-height: 2.2rem;
+    text-align: center;
+    position: absolute;
+    top: -9px;
+    right: -9px;
+
 }
