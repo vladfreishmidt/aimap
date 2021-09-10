@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import s from '../CCFilter/CCFilter.module.css';
 
-const CCFilter = ({ setObjectFilterActive, CCFilterActive, setCCFilterActive }) => {
+
+const CCFilter = ({setObjectFilterActive, CCFilterActive, setCCFilterActive}) => {
 
 
    return (
       <div className={s.filterWrapper}>
          <button className={`${s.btn} ${CCFilterActive ? s.active : ''}`}
-            onClick={() => {
-               setCCFilterActive(curr => !curr)
-               setObjectFilterActive(false)
-            }}>
+                 onClick={() => {
+                    setCCFilterActive(curr => !curr)
+                    setObjectFilterActive(false)
+                 }}>
             Єтап документації
          </button>
          {
@@ -29,34 +30,40 @@ const CCFilter = ({ setObjectFilterActive, CCFilterActive, setCCFilterActive }) 
 
                   <div className={s.formGroup}>
                      <label htmlFor="c1">
-
-                        <input type="checkbox" id="c1" />
-                        <span>відмова у видачі сертифікату</span>
+                        <input type="checkbox" id="c1"/>
+                        <span>
+                           відмова у видачі сертифікату
+                        </span>
                      </label>
                      <label htmlFor="c2">
-
-                        <input type="checkbox" id="c2" />
-                        <span>відмова у наданні дозволу</span>
+                        <input type="checkbox" id="c2"/>
+                        <span>
+                           відмова у наданні дозволу
+                        </span>
                      </label>
                      <label htmlFor="c3">
-
-                        <input type="checkbox" id="c3" />
-                        <span>відмова у реєстрації декларації про готовність об'єкта до експлуатації</span>
+                        <input type="checkbox" id="c3"/>
+                        <span>
+                           відмова у реєстрації декларації про готовність об'єкта до експлуатації
+                        </span>
                      </label>
                      <label htmlFor="c4">
-
-                        <input type="checkbox" id="c4" />
-                        <span>видача сертифіката про прийняття в експлуатацію закінчених будівництвом об’єктів</span>
+                        <input type="checkbox" id="c4"/>
+                        <span>
+                           видача сертифіката про прийняття в експлуатацію закінчених будівництвом об’єктів
+                        </span>
                      </label>
                      <label htmlFor="c5">
-
-                        <input type="checkbox" id="c5" />
-                        <span>декларація про готовність до експлуатації за рішенням суду</span>
+                        <input type="checkbox" id="c5"/>
+                        <span>
+                           декларація про готовність до експлуатації за рішенням суду
+                        </span>
                      </label>
                      <label htmlFor="c6">
-
-                        <input type="checkbox" id="c6" />
-                        <span>декларація про готовність до експлуатації об’єкта</span>
+                        <input type="checkbox" id="c6"/>
+                        <span>
+                           декларація про готовність до експлуатації об’єкта
+                        </span>
                      </label>
 
 
@@ -67,11 +74,15 @@ const CCFilter = ({ setObjectFilterActive, CCFilterActive, setCCFilterActive }) 
                   <button
                      className={s.clearFiltersBtn}
 
-                  >Очистити</button>
+                  >
+                     Очистити
+                  </button>
                   <button
                      className={s.applyFiltersBtn}
                      onClick={() => setCCFilterActive(curr => !curr)}
-                  >Застосувати</button>
+                  >
+                     Застосувати
+                  </button>
                </div>
             </div>
          }

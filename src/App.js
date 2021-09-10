@@ -8,6 +8,7 @@ import {Route, Switch} from "react-router-dom";
 import RMap from './components/RMap/RMap';
 import Home from './components/Home/Home';
 import {useQuery} from 'react-query';
+import {Accordion} from '@material-ui/core'
 
 function App() {
 
@@ -16,7 +17,6 @@ function App() {
       longitude: 30.8935546875,
       zoom: 5
    });
-   // -------------
 
    const [objects, setObject] = useState([]);
    const [objectsFoundTotal, setObjectsFoundTotal] = useState(0);
@@ -89,6 +89,7 @@ function App() {
 
    // React Query
       const {status, error, data} = useQuery('dataDefault', getDefaultResults);
+      console.log(error)
 
 
    // FETCH OBJECT DETAILS BY ID
@@ -209,7 +210,7 @@ function App() {
                            objectsFoundTotal={objectsFoundTotal}
                            viewport={viewport}
                            setViewport={setViewport}
-                           // getDefaultResults={getDefaultResults}
+                           getDefaultResults={getDefaultResults}
                            setObjectsFoundTotal={setObjectsFoundTotal}
                         />
                      </>
